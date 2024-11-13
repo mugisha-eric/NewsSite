@@ -1,0 +1,400 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% block headblock %}
+    {% endblock %}
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'front/images/icons/favicon2.png' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'front/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'front/fonts/fontawesome-5.0.8/css/fontawesome-all.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'front/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'front/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'front/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'front/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'front/css/util.min.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'front/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+
+<body class="animsition">
+	
+<!-- Header Section Start -->
+	<header>
+	<!-- Header desktop -->
+		<div class="container-menu-desktop">
+
+
+
+		<!-- Top Bar Start -->
+			<div class="topbar">
+				<div class="content-topbar h-100 p-rl-30">
+					
+					<div class="align-self-stretch size-w-0 pos-relative m-r-30">
+						<div class="f2-s-1 flex-wr-s-c s-full ab-t-l p-b-2">
+							<span class="text-uppercase cl0 p-r-8">
+								Trending Now:
+							</span>
+
+							<span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
+								
+								{% for trend in trending %}
+								<span class="dis-inline-block slide100-txt-item animated visible-false">
+									{{ trend.txt }}
+								</span>
+								{% endfor %}
+
+							</span>
+						</div>
+					</div>
+						
+
+					<div class="flex-wr-e-c">
+						<div class="left-topbar">
+							
+
+							<a href="/about" class="left-topbar-item">
+								About
+							</a>
+
+							<a href="/contact" class="left-topbar-item">
+								Contact
+							</a>
+
+							<a href="/login" class="left-topbar-item">
+								Log in / Sign up
+							</a>
+
+							<a href="#" class="left-topbar-item"></a>
+						</div>
+
+						<div class="right-topbar p-l-18">
+							<a href="{{ site.fb }}">
+								<span class="fab fa-facebook-f"></span>
+							</a>
+
+							<a href="{{ site.tw }}">
+								<span class="fab fa-twitter"></span>
+							</a>
+
+							<a href="{{ site.yt }}">
+								<span class="fab fa-youtube"></span>
+							</a>
+						</div>
+					</div>	
+				</div>
+			</div>
+		<!-- Top Bar End -->
+		
+			
+		<!-- Start (Top Logo) -->
+			<div class="wrap-logo no-banner container">
+			<!-- Logo desktop(Logo in Top Section) Start -->		
+				<div class="logo">
+					<a href="/"><img src="{{ site.picurl }}" alt="LOGO"></a> <!-- Logo in Top Section -->	
+				</div>
+			<!-- Logo desktop(Logo in Top Section) End -->
+			</div>
+		<!-- End (Top Logo) -->	
+			
+			
+		<!-- Start -->
+			<div class="wrap-main-nav">
+				<div class="main-nav">
+				<!-- Menu desktop (Menu nav bar) Start -->
+					<nav class="menu-desktop">
+						<a class="logo-stick" href="/">
+							<img src="{{ site.picurl }}" alt="LOGO">
+						</a>
+
+						<ul class="main-menu justify-content-center">
+							<li class="main-menu-active">
+								<a href="/">Home</a>
+							</li>
+
+							<!-- cat from views.py(main app) -->
+							{% for gg in cat %}
+							{% if gg.count != 0 %} <!--if the category has no news then the category will not be shown-->
+							<li class="mega-menu-item">
+								<a href="category-01.html">{{ gg.name }}</a>
+								
+								<div class="sub-mega-menu">
+								<!-- Sub Menu Bar (When i click or put cursor on Category Besides Home) Start -->
+									<div class="nav flex-column nav-pills" role="tablist">
+										<a class="nav-link active" data-toggle="pill" href="#news-0" role="tab">All</a>
+
+										{% for subcat in subcat %}
+										{% if subcat.catid == gg.pk %}
+										<a class="nav-link" data-toggle="pill" href="#{{ subcat.pk }}" role="tab">{{ subcat.name }}</a>
+										{% endif %}
+										{% endfor %}
+										
+									</div>
+								<!-- Sub Menu Bar (When i click or put cursor on Category Besides Home) End -->
+
+							<!-- Category and sub-category news shows in menu bar (When i click or put cursor on Category Besides Home) Start -->
+									<div class="tab-content">
+										<div class="tab-pane show active" id="news-0" role="tabpanel">
+											<div class="row">
+
+												<!-- here news is a query name from main app's views -->
+												{% for hh in news %}
+												{% if hh.ocatid == gg.pk %}  <!-- pk means id of the category -->
+												<div class="col-3">
+													<!-- Item post -->	
+													<div>
+														<a href="{% url 'news_detail' word=hh.name %}" class="wrap-pic-w hov1 trans-03">
+															<img style="display: inline-block; width: 220x; height: 110px;" src="{{ hh.picurl }}" alt="IMG">
+														</a>
+
+														<div class="p-t-10">
+															<h5 class="p-b-5">
+																<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">
+																	{{ hh.name }}
+																</a>
+															</h5>
+
+															<span class="cl8">
+																<a href="{% url 'news_detail' word=hh.name %}" class="f1-s-6 cl8 hov-cl10 trans-03">
+																	{{ hh.catname }}
+																</a>
+
+																<span class="f1-s-3 m-rl-3">
+																	-
+																</span>
+
+																<span class="f1-s-3">
+																	{{ hh.date }}
+																</span>
+															</span>
+														</div>
+													</div>
+												</div>
+												{% endif%}
+												{% endfor %}
+
+											</div>
+										</div>
+
+										{% for subcat2 in subcat %}
+										<div class="tab-pane" id="{{ subcat2.pk }}" role="tabpanel">
+											<div class="row">
+
+
+										<!-- here news is a query name from main app's views -->
+										{% for hh in news %}
+										{% if hh.catid == subcat2.pk %}  <!-- pk means id of the category -->
+										<div class="col-3">
+											<!-- Item post -->	
+											<div>
+												<a href="{% url 'news_detail' word=hh.name %}" class="wrap-pic-w hov1 trans-03">
+													<img style="display: inline-block; width: 220x; height: 110px;" src="{{ hh.picurl }}" alt="IMG">
+												</a>
+
+												<div class="p-t-10">
+													<h5 class="p-b-5">
+														<a href="#" class="f1-s-5 cl3 hov-cl10 trans-03">
+															{{ hh.name }}
+														</a>
+													</h5>
+
+													<span class="cl8">
+														<a href="{% url 'news_detail' word=hh.name %}" class="f1-s-6 cl8 hov-cl10 trans-03">
+															{{ hh.catname }}
+														</a>
+
+														<span class="f1-s-3 m-rl-3">
+															-
+														</span>
+
+														<span class="f1-s-3">
+															{{ hh.date }}
+														</span>
+													</span>
+												</div>
+											</div>
+										</div>
+										{% endif%}
+										{% endfor %}
+												
+
+											</div>
+										</div>
+										{% endfor %}
+
+									</div>
+							<!-- Category and sub-category news shows in menu bar (When i click or put cursor on Category Besides Home) End -->
+								</div>
+							</li>
+							{% endif %}
+							{% endfor %}
+
+						</ul>
+					</nav>
+				<!-- Menu desktop (Menu nav bar) End -->	
+				</div>
+			</div>	
+		<!-- End -->	
+		</div>
+	</header>
+<!-- Header Section End -->        
+    
+
+	{% block mainblock %}
+	
+    {% endblock %}
+
+
+
+<!-- Footer Section Start -->
+	<footer>
+		<div class="bg2 p-t-40 p-b-25">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 p-b-20">
+						<div class="size-h-3 flex-s-c">
+							<a href="/">
+								<img class="max-s-full" src="{{ site.picurl2 }}" alt="LOGO">
+							</a>
+						</div>
+
+						<div>
+							<p class="f1-s-1 cl11 p-b-16">
+								{{site.about | safe }}
+							</p>
+
+							<p class="f1-s-1 cl11 p-b-16">
+								Tell : {{ site.tell }}
+							</p>
+
+							<div class="p-t-15">
+								<a href="{{ site.fb }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-facebook-f"></span>
+								</a>
+
+								<a href="{{ site.tw }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-twitter"></span>
+								</a>
+
+								<a href="{{ site.yt }}" class="fs-18 cl11 hov-cl10 trans-03 m-r-8">
+									<span class="fab fa-youtube"></span>
+								</a>
+							</div>
+							<br>
+
+							<!-- Newaletter Start -->
+							<form action="{% url 'news_letter' %}" method="POST">
+								{% csrf_token %}
+								<input class="bo-1-rad-3 bocl13 size-a-19 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="txt" name="txt" placeholder="Email or Phone Number">
+								<button type="submit" class="size-a-20 bg1 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-20">Send</button>
+							</form>
+							<!-- Newaletter End -->
+
+						</div>
+					</div>
+
+			<!-- Popular Post in Footer Section Start  -->
+					<div class="col-sm-6 col-lg-4 p-b-20">
+						<div class="size-h-3 flex-s-c">
+							<h5 class="f1-m-7 cl0">
+								Popular Posts
+							</h5>
+						</div>
+
+				<!-- Dynamic Popular Post in Footer Section Start -->
+						<ul>
+							{% for pop in popnews2 %}
+							<li class="flex-wr-sb-s p-b-20">
+								<a href="{% url 'news_detail' word=pop.name %}" class="size-w-4 wrap-pic-w hov1 trans-03">
+									<img src="{{ pop.picurl }}" alt="IMG">
+								</a>
+
+								<div class="size-w-5">
+									<h6 class="p-b-5">
+										<a href="{% url 'news_detail' word=pop.name %}" class="f1-s-5 cl11 hov-cl10 trans-03">
+											{{ pop.name }}
+										</a>
+									</h6>
+
+									<span class="f1-s-3 cl6">
+										{{ pop.date }}
+									</span>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+				<!-- Dynamic Popular Post in Footer Section End -->
+					</div>
+			<!-- Popular Post in Footer Section(Dynamic) End  -->
+
+					<div class="col-sm-6 col-lg-4 p-b-20">
+						<div class="size-h-3 flex-s-c">
+							<h5 class="f1-m-7 cl0">
+								Category
+							</h5>
+						</div>
+
+						<!-- For showing categories in footer start -->
+						<ul class="m-t--12">
+							{% for c in cat %}
+							{% if c.count != 0 %} <!--if the category has news then show it otherwise it will not appear-->
+							<li class="how-bor1 p-rl-5 p-tb-10">
+								<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+									{{ c.name }} ({{ c.count }})
+								</a>
+							</li>
+							{% endif %}
+							{% endfor %}
+						</ul>
+						<!-- For showing categories in footer end -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bg11">
+			<div class="container size-h-4 flex-c-c p-tb-15">
+				
+				<span class="f1-s-1 cl0 txt-center">
+				&copy;	2024  Hope Haven School - Information Department. All right Reserved | Powered By: <a href="https://buymeacoffee.com/funderic" target="_blank">Mugisha Eric</a>
+				</span>
+			</div>
+		</div>
+	</footer>
+<!-- Footer Section End -->
+
+	<!-- Back to top (Angle Up) Start -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<span class="fas fa-angle-up"></span>
+		</span>
+	</div>
+	<!-- Back to top (Angle Up) End -->
+	
+
+<!--===============================================================================================-->	
+	<script src="{% static 'front/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'front/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'front/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'front/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'front/js/main.js' %}"></script>
+
+</body>
+</html>

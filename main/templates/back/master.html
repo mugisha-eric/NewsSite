@@ -1,0 +1,386 @@
+{% load static %}
+
+{% load extra_auth %}
+
+{% if user.is_authenticated %}  <!-- Lock admin page Start -->
+
+<!DOCTYPE html>
+ <html class="no-js" lang="en"> 
+    <head>
+        <meta charset="utf-8">
+
+        <title>Admin Panel</title>
+
+        <meta name="description" content="ProUI is a Responsive Bootstrap Admin Template created by pixelcave and published on Themeforest.">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+
+        <!-- Icons Start -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{% static 'back/img/favicon.png' %}">
+        <link rel="apple-touch-icon" href="{% static 'back/img/icon57.png' %}" sizes="57x57">
+        <link rel="apple-touch-icon" href="{% static 'back/img/icon72.png' %}" sizes="72x72">
+        <link rel="apple-touch-icon" href="{% static 'back/img/icon76.png' %}" sizes="76x76">
+        <link rel="apple-touch-icon" href="{% static 'back/img/icon114.png' %}" sizes="114x114">
+        <link rel="apple-touch-icon" href="{% static 'back/img/icon120.png' %}" sizes="120x120">
+        <link rel="apple-touch-icon" href="{% static 'back/img/icon144.png' %}" sizes="144x144">
+        <link rel="apple-touch-icon" href="{% static 'back/img/icon152.png' %}" sizes="152x152">
+        <link rel="apple-touch-icon" href="{% static 'back/img/icon180.png' %}" sizes="180x180">
+        <!-- Icons End -->
+
+        <!-- Stylesheets -->
+        <!-- Bootstrap is included in its original form, unaltered -->
+        <link rel="stylesheet" href="{% static 'back/css/bootstrap.min.css' %}">
+
+        <!-- Related styles of various icon packs and plugins -->
+        <link rel="stylesheet" href="{% static 'back/css/plugins.css' %}">
+
+        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+        <link rel="stylesheet" href="{% static 'back/css/main.css' %}">
+
+        <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+
+        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" href="{% static 'back/css/themes.css' %}">
+        <!-- END Stylesheets -->
+
+        <!-- Modernizr (browser feature detection library) -->
+        <script src="{% static 'back/js/vendor/modernizr.min.js' %}"></script>
+
+        
+    <!-- Add Editor(CKEditor) for News Add Page(Add News) Start -->
+        {% block headblock %}
+        {% endblock %}
+    <!-- Add Editor(CKEditor) for News Add Page(Add News) End -->
+
+
+    </head>
+    <body>
+    <!-- Page Wrapper Start -->
+        <div id="page-wrapper">
+
+        <!-- Preloader Start(Preloaders are important interface elements that let visitors know that the website hasn't crashed, it's just processing data) -->
+            <div class="preloader themed-background">
+                <h1 class="push-top-bottom text-light text-center"><strong>Admin</strong>Panel</h1>
+                <div class="inner">
+                    <h3 class="text-light visible-lt-ie10"><strong>Loading..</strong></h3>
+                    <div class="preloader-spinner hidden-lt-ie10"></div>
+                </div>
+            </div>
+        <!-- Preloader End(Preloaders are important interface elements that let visitors know that the website hasn't crashed, it's just processing data) -->
+
+        <!-- Page Container Start -->
+            <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+ 
+
+            <!-- Main Sidebar Start -->
+                <div id="sidebar">
+                <!-- Wrapper for scrolling functionality(Sidebar Scrolling) Start -->
+                    <div id="sidebar-scroll">
+                    <!-- Sidebar Content Start -->
+                        <div class="sidebar-content">
+                        <!-- Brand for sidebar Start -->
+                            <a href="/panel" class="sidebar-brand">
+                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin</strong>Panel</span>
+                            </a>
+                        <!-- Brand for sidebar End -->
+
+                        <!-- User Information Start -->
+                            <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
+                                <div class="sidebar-user-avatar">
+                                    <a href="#">
+                                        <img src="{% static 'back/img/placeholders/avatars/avatar2.jpg' %}" alt="avatar">
+                                    </a>
+                                </div>
+                                <div class="sidebar-user-name">{{ request.user }}</div> <!-- Dynamic Username(Logged in user) -->
+                                <div class="sidebar-user-links">
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="gi gi-user"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="gi gi-envelope"></i></a>
+                                    <a href="/panel/change/pass/" class="enable-tooltip" data-placement="bottom" title="Settings" ><i class="gi gi-cogwheel"></i></a>
+                                    <a href="/logout" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                                </div>
+                            </div>
+                        <!-- User Information End -->
+
+
+
+                    <!-- Sidebar Navigation(To add category, sub category, settings etc) Start -->
+                        <ul class="sidebar-nav">
+
+                        <!-- Permission Check(logged in user can access or not) Start -->
+                            {% if perms.main.master_user %}
+                            <li>
+                                <a href="/panel" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
+                            </li>
+                            {% endif %}
+                        <!-- Permission Check(logged in user can access or not) End -->
+
+            <!-- Master User(Which sections i don't want to show for other users) Hide Start -->
+                {% if request.user|has_group:"masteruser" %}
+
+                    <!-- Site Settings Panel(To add all the settings) Start -->
+                            <li class="sidebar-header">
+                                <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                                <span class="sidebar-header-title">Site Settings</span>
+                            </li>
+                    <!-- Site Settings Panel(To add all the settings) End -->
+                            <!-- Settings (Under Site Settings Panel) Start -->
+                                <li>
+                                    <a href="/panel/setting/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Settings</span></a>
+                                </li>
+                            <!-- Settings (Under Site Settings Panel) End -->
+                            <!-- About Settings (Under Site Settings Panel) Start -->
+                                <li>
+                                    <a href="/panel/about/setting/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">About Settings</span></a>
+                                </li>
+                            <!-- About Settings (Under Site Settings Panel) End -->
+                            <!-- Contact Forms (Under Site Settings Panel) Start -->
+                                <li>
+                                    <a href="/panel/contactform/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Contact Forms</span></a>
+                                </li>
+                            <!-- Contact Forms (Under Site Settings Panel) End -->
+
+                        <!-- Comments List (Under Site Settings Panel) Start -->
+                            <li>
+                                <a href="/comments/list/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Comments</span></a>
+                            </li>
+                        <!-- Comments List (Under Site Settings Panel) End -->
+
+                        <!-- Comments List (Under Site Settings Panel) Start -->
+                        <li>
+                            <a href="/blacklist/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Black List</span></a>
+                        </li>
+                        <!-- Comments List (Under Site Settings Panel) End -->
+
+        
+            <!-- Permissions Panel(To control the user permissions) Start -->
+                <li class="sidebar-header">
+                    <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                    <span class="sidebar-header-title">Permissions</span>
+                </li>
+            <!-- Permissions Panel(To control the user permissions) End -->
+                <!-- Group and Permission Forms (Under Permissions Panel) Start -->
+                    <li>
+                        <a href="/panel/manager/group/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Group</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/panel/manager/perms/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Permission</span></a>
+                    </li>
+                <!-- Group and Permissions Forms (Under Permissions Panel) End -->
+
+
+                <!-- Manager Panel(To control the managers) Start -->
+                    <li class="sidebar-header">
+                        <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                        <span class="sidebar-header-title">Manager</span>
+                    </li>
+                <!-- Manager Panel(To control the managers) End -->
+                    <!-- Manager List Forms (Under Manager Panel) Start -->
+                        <li>
+                            <a href="/panel/manager/list/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Manager List</span></a>
+                        </li>
+                    <!-- Manager List Forms (Under Manager Panel) End -->
+
+                {% endif %}
+            <!-- Master User(Which sections i don't want to show for other users) Hide End -->
+            
+                            
+                <!-- News Section (Under Site Settings Panel) Start -->
+                        <li class="sidebar-header">
+                            <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a></span>
+                            <span class="sidebar-header-title">News Section</span>
+                        </li>
+                <!-- News Section (Under Site Settings Panel) End -->
+
+
+
+            <!-- Master User(Which sections i don't want to show for other users) Hide Start -->
+                {% if request.user|has_group:"masteruser" %}
+
+                    <!-- Category(add and list) Start -->
+                        <li>
+                            <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Category</span></a>
+                            <ul>
+                                <li>
+                                    <a href="/panel/category/add">Add Category</a>  <!-- this link provided from urls.py -->
+                                </li>
+
+                                <li>
+                                    <a href="/panel/category/list">Categories List</a>   <!-- this link provided from urls.py -->
+                                </li>
+                                    
+                            </ul>
+                        </li>
+                    <!-- Category(add and list) End -->
+
+                    <!-- Sub-Category(add and list) Start -->
+                        <li>
+                            <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">SubCategory</span></a>
+                            <ul>
+
+                                <li>
+                                    <a href="/panel/subcategory/add">Add SubCategory</a>  <!-- this link provided from urls.py -->
+                                </li>
+
+                                <li>
+                                    <a href="/panel/subcategory/list">SubCategories List</a>  <!-- this link provided from urls.py -->
+                                </li>
+
+                            </ul>
+                        </li>
+                    <!-- Sub-Category(add and list) End -->
+
+
+                    <!-- Newsletter Start -->
+                    <li>
+                        <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Newsletter</span></a>
+                        <ul>
+
+                            <li>
+                                <a href="/panel/newsletter/emails">Emails</a>  <!-- this link provided from urls.py -->
+                            </li>
+
+                            <li>
+                                <a href="/panel/newsletter/phones">Phone Numbers</a>  <!-- this link provided from urls.py -->
+                            </li>
+
+                        </ul>
+                    </li>
+                <!-- Newsletter End -->
+
+
+                {% endif %}
+            <!-- Master User(Which sections i don't want to show for other users) Hide End -->
+
+
+
+                            <!-- News(add and list) Start -->
+                                <li>
+                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">News</span></a>
+                                    <ul>
+
+                                        <li>
+                                            <a href="/panel/news/add/">Add News</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/panel/news/list/">News List</a>
+                                        </li>
+                                    
+                                    </ul>
+                                </li>
+                            <!-- News(add and list) End -->
+
+
+
+            <!-- Master User(Which sections i don't want to show for other users) Hide Start -->
+                {% if request.user|has_group:"masteruser" %}
+                        <!-- Trending (Under News Section Panel) Start -->
+                            <li>
+                                <a href="/panel/trending/" class=""><i class="gi gi-show_big_thumbnails sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Trending</span></a>
+                            </li>
+                        <!-- Trending (Under News Section Panel) End -->
+                {% endif %}
+            <!-- Master User(Which sections i don't want to show for other users) Hide End -->
+
+            
+                            </ul>
+                    <!-- Sidebar Navigation(To add category, sub category, settings etc) End -->
+
+
+                        </div>
+                    <!-- Sidebar Content End -->
+                    </div>
+                <!-- Wrapper for scrolling functionality(Sidebar Scrolling) End -->
+                </div>
+            <!-- Main Sidebar End -->
+
+
+            <!-- Main Container Start -->
+                <div id="main-container">
+                <!-- Header Section Start -->
+                    <header class="navbar navbar-default">
+
+
+                    <!-- Left Header Navigation Start -->
+                        <ul class="nav navbar-nav-custom">
+                        <!-- Main Sidebar Toggle Button Start -->
+                            <li>
+                                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                                    <i class="fa fa-bars fa-fw"></i>
+                                </a>
+                            </li>
+                        <!-- Main Sidebar Toggle Button End -->                           
+                        </ul>
+                    <!-- Left Header Navigation End -->
+
+
+                    <!-- Search Form Start -->
+                        <form action="#" method="post" class="navbar-form-custom">
+                            <div class="form-group">
+                                <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
+                            </div>
+                        </form>
+                    <!-- Search Form End -->
+                        
+                    </header>
+                <!-- Header Section End -->
+
+
+                <!-- Page Content Start -->
+                    <div id="page-content">
+                        <!-- Dashboard Header -->                    
+                    {% block mainblock %}
+
+                    {% endblock %}
+                    </div>
+                <!-- Page Content End -->
+
+
+                <!-- Footer Section Start -->
+                    <footer class="clearfix">
+                        <div class="pull-right">
+                            2024 &copy; Hope Haven School - Information Department. All right Reserved | 
+                            Crafted with <i class="fa fa-heart text-danger"></i> by <a href="https://buymeacoffee.com/funderic" target="_blank">Mugisha Eric</a>
+                            
+                        </div>
+                    </footer>
+                <!-- Footer Section End -->
+
+                </div>
+            <!-- Main Container End -->
+
+            </div>
+        <!-- Page Container End -->
+
+        </div>
+    <!-- Page Wrapper End -->
+
+        
+        <!-- Scroll to top link, initialized in js/app.js - scrollToTop() -->
+        <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+        <!-- jQuery, Bootstrap.js, jQuery plugins and Custom JS code -->
+        <script src="{% static 'back/js/vendor/jquery.min.js' %}"></script>
+        <script src="{% static 'back/js/vendor/bootstrap.min.js' %}"></script>
+        <script src="{% static 'back/js/plugins.js' %}"></script>
+        <script src="{% static 'back/js/app.js' %}"></script>
+
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key="></script>
+        <script src="{% static 'back/js/helpers/gmaps.min.js' %}"></script>
+
+        {% block footerblock %}
+        {% endblock %}
+        
+    </body>
+</html>
+
+{% else %}
+
+Please Login
+
+{% endif %}    <!-- Lock admin page End -->
