@@ -25,15 +25,8 @@ Welcome to **News Hub**, your go-to source for the latest news from around the w
 - **Backend:** Django - A high-level Python web framework that encourages rapid development and clean, pragmatic design.
 - **Frontend:** HTML, CSS, Bootstrap, and JavaScript - For a responsive and interactive user interface.
 <br>
-![](https://img.shields.io/badge/Code-SQLite-informational?style=flat&logo=SQLite&color=003B57)
-![](https://img.shields.io/badge/Code-HTML5-informational?style=flat&logo=HTML5&color=E34F26)
-![](https://img.shields.io/badge/Code-JavaScript-informational?style=flat&logo=JavaScript&color=F7DF1E)
-![](https://img.shields.io/badge/Style-Bootstrap-informational?style=flat&logo=Bootstrap&color=7952B3)
-![](https://img.shields.io/badge/Style-CSS3-informational?style=flat&logo=CSS3&color=1572B6)
 
-![](https://img.shields.io/badge/Code-SQLite-informational?style=flat&logo=SQLite&color=003B57)
-
-![Tech Stack](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6EXjDBaAR_D6DgNxEbHHsJYwzrfHLoxJUQQ&s)
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6EXjDBaAR_D6DgNxEbHHsJYwzrfHLoxJUQQ&s)
 
 ## 📚 How to Use
 
