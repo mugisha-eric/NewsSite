@@ -72,7 +72,7 @@ For inquiries or feedback, please contact us at [mugisha@tuta.io](mailto:mugisha
 
 Here are some screenshots of the **News Hub** interface:
 
-![Homepage](https://example.com/homepage-screenshot.jpg)  <!-- Replace with actual image URL -->
+![Homepage](https://github.com/mugisha-eric/NewsSite/blob/main/screenshot.png?raw=true)
 ![Article Page](https://example.com/article-page-screenshot.jpg)  <!-- Replace with actual image URL -->
 
 ---
