@@ -48,7 +48,7 @@ We welcome contributions! If you'd like to contribute to **News Hub**, please fo
 
 If you enjoy using **News Hub** and want to support our work, consider buying us a coffee! ☕️
 
-[![Buy Me a Coffee](https://example.com/buy-me-a-coffee-button.png)](https://www.buymeacoffee.com/funderic)
+[![Buy Me a Coffee](https://media.licdn.com/dms/image/D4D12AQFQEYt2Sf4vng/article-cover_image-shrink_720_1280/0/1701704889630?e=2147483647&v=beta&t=89MWp_ioFE_beKd1jLu3L0qasnWVp2DRr0y9GLlHdtw)](https://www.buymeacoffee.com/funderic)
 
 ## ⭐ Show Your Support
 
